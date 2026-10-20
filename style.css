@@ -1,0 +1,229 @@
+
+:root {
+    font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+    color: #18243b;
+    background: #f3f6fc;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 850px;
+    margin: 48px auto;
+    padding: 0 18px;
+}
+
+header {
+    margin: 22px 0 26px;
+}
+
+h1 {
+    font-size: clamp(1.8rem, 4vw, 2.7rem);
+    margin: 0 0 6px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+p {
+    color: #526078;
+}
+
+.panel {
+    background: white;
+    border: 1px solid #dfe6f1;
+    border-radius: 18px;
+    padding: clamp(20px, 4vw, 36px);
+    box-shadow: 0 10px 36px #18304d0a;
+}
+
+label {
+    display: block;
+    font-weight: 650;
+    margin: 17px 0 7px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #b9c7db;
+    border-radius: 9px;
+    background: white;
+    font: inherit;
+}
+
+input:focus,
+select:focus {
+    outline: 2px solid #4676e0;
+}
+
+button {
+    border: 0;
+    border-radius: 9px;
+    background: #245ed2;
+    color: white;
+    font: inherit;
+    font-weight: 700;
+    padding: 14px 18px;
+    cursor: pointer;
+    margin-top: 22px;
+}
+
+button:hover {
+    background: #184aaf;
+}
+
+a {
+    color: #245ed2;
+}
+
+.error {
+    color: #ae2020;
+}
+
+.paper-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.paper-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    border: 1px solid #dce5f2;
+    padding: 17px;
+    border-radius: 12px;
+    color: #18243b;
+}
+
+.paper-link:hover {
+    border-color: #245ed2;
+    background: #f6f9ff;
+}
+
+.paper-link span {
+    color: #245ed2;
+    font-size: 0.9rem;
+}
+
+/* Share with friends section */
+
+.share-section {
+    margin-top: 30px;
+    padding: 25px;
+    text-align: center;
+    background: #f0fdf4;
+    border-radius: 12px;
+}
+
+.share-section h3 {
+    margin-bottom: 10px;
+}
+
+.share-section p {
+    margin-bottom: 18px;
+    color: #475569;
+}
+
+#share-friends {
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 13px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#share-friends:hover {
+    background: #1da851;
+}
+
+/* Mobile responsiveness */
+
+@media (max-width: 560px) {
+    .container {
+        margin: 22px auto;
+    }
+
+    .paper-link {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+
+/* Compact agreement checkbox */
+.consent-field {
+  margin: 10px 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.consent-field label {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  cursor: pointer;
+}
+
+.consent-field input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  margin: 2px 0 0;
+  flex-shrink: 0;
+}
+
+.consent-field a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+/* Compact bottom footer */
+.site-footer {
+  margin-top: 30px;
+  padding: 14px 12px;
+  background: #f1f5f9;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+
+.footer-links a {
+  color: #475569;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.footer-links a:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.site-footer p {
+  margin: 8px 0 0;
+  font-size: 11px;
+  color: #94a3b8;
+}
