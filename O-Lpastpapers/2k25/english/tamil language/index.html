@@ -1,0 +1,294 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>O/L MCQ Examination</title>
+  <link rel="stylesheet" href="../../../../style.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #f3f6fb;
+    }
+
+    .exam-container {
+      width: 98%;
+      max-width: 1900px;
+      margin: 12px auto;
+    }
+
+    .exam-header {
+      background: white;
+      padding: 12px 18px;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+
+    .exam-header h1 {
+      font-size: 21px;
+      margin: 0 0 4px;
+    }
+
+    .exam-header p {
+      margin: 0;
+    }
+
+    .exam-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 270px;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .paper-section,
+    .answer-section {
+      background: white;
+      border: 1px solid #dce5f2;
+      border-radius: 10px;
+      padding: 12px;
+      min-width: 0;
+    }
+
+    .paper-section h2,
+    .answer-section h2 {
+      font-size: 17px;
+      margin: 0 0 10px;
+    }
+
+    /* One paper image at a time */
+    .paper-frame {
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-height: 600px;
+        border: none;
+        background: white;
+    }
+
+    .paper-viewer {
+        height: calc(100vh - 215px);
+        min-height: 600px;
+        overflow: hidden;
+        background: white;
+        border-radius: 8px;
+}
+
+    .page-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .page-controls button {
+      padding: 10px 14px;
+      background: #2563eb;
+      color: white;
+      border: 0;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .page-controls button:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    /* Compact right answer panel */
+    .answer-section {
+      position: sticky;
+      top: 10px;
+      height: calc(100vh - 20px);
+      overflow-y: auto;
+    }
+
+    .answers {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+
+    .question {
+      border: 1px solid #dce5f2;
+      border-radius: 7px;
+      padding: 7px;
+      margin: 0;
+      min-width: 0;
+    }
+
+    .question legend {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 0 4px;
+    }
+
+    .options {
+      display: flex;
+      gap: 3px;
+    }
+
+    .options label {
+      flex: 1;
+      min-width: 0;
+      padding: 6px 2px;
+      border: 1px solid #dce5f2;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 12px;
+      margin: 0;
+    }
+
+    .options input {
+      width: auto;
+      margin: 0 2px 0 0;
+    }
+
+    .options label:has(input:checked) {
+      background: #dbeafe;
+      border-color: #2563eb;
+      font-weight: 700;
+    }
+
+    #submit {
+      width: 100%;
+      padding: 11px;
+      margin-top: 12px;
+      background: #16804a;
+      color: white;
+      border: 0;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    #submit:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .error {
+      color: #b91c1c;
+      padding: 8px;
+    }
+
+    #result {
+      margin-top: 15px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .review {
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .good { color: #12683e; }
+    .bad { color: #b02a2a; }
+
+    @media (max-width: 700px) {
+      .exam-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .paper-viewer {
+        height: 60vh;
+        min-height: 300px;
+      }
+
+      .answer-section {
+        position: static;
+        height: auto;
+        max-height: 450px;
+      }
+
+      .answers {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="exam-container">
+
+    <a href="../../../../papers.html">
+      ← Back to paper list
+    </a>
+
+    <header class="exam-header">
+      <h1 id="paper-title"></h1>
+      <p id="student-name"></p>
+    </header>
+
+    <div class="exam-layout">
+
+      <section class="paper-section">
+        <h2>Question Paper</h2>
+
+        <div class="paper-viewer" id="paper-viewer">
+          <div id="pages"></div>
+        </div>
+
+        <div class="page-controls">
+          <button id="prev-page" type="button">
+            ← Previous
+          </button>
+
+          <span id="page-number">Page 1</span>
+
+          <button id="next-page" type="button">
+            Next →
+          </button>
+        </div>
+      </section>
+
+      <aside class="answer-section">
+        <h2>Answer Sheet</h2>
+
+        <div id="answers" class="answers"></div>
+
+        <p id="config-error" class="error" hidden></p>
+
+        <button id="submit" type="button">
+          Submit and Mark
+        </button>
+      </aside>
+
+    </div>
+
+    <section id="result" hidden></section>
+
+  </main>
+
+<script>
+    window.PAPER = {
+      year: 2025,
+      subject: "Tamil Language",
+      medium: "Tamil",
+      questionCount: 40,
+
+      pages: [
+        "page1.pdf",
+        "page2.pdf",
+        "page3.pdf",
+        "page4.pdf"
+      ],
+
+      answerKey: [
+        2, 4, 1, 3, 2, 1, 4, 3, 1, 2,
+        3, 1, 4, 2, 3, 4, 2, 1, 3, 4,
+        1, 3, 2, 4, 1, 2, 3, 1, 4, 2,
+        4, 2, 3, 1, 4, 3, 1, 2, 4, 3
+      ]
+    };
+  </script>
+
+  <script src="../../../../paper.js"></script>
+</body>
+</html>
